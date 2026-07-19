@@ -1,0 +1,27 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Environment files
+.env
+
+# Logs and reports
+logs/*.log
+reports/*
+screenshots/*
+test_results/*
+playwright_report/*
+
+# Keep empty directories
+!logs/.gitkeep
+!reports/.gitkeep
+!screenshots/.gitkeep
+!test_results/.gitkeep
+!playwright_report/.gitkeep
+
+# VS Code
+.vscode/
