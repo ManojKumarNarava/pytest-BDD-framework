@@ -1,27 +1,24 @@
-# Virtual environment
-venv/
+# Test execution artifacts
+reports/
+screenshots/
+traces/
+videos/
+allure-results/
+allure-report/
+test-results/
+test_results/
 
-# Python cache
+# Logs
+logs/
+
+# Python
 __pycache__/
 *.pyc
 .pytest_cache/
 
+# Virtual environment
+venv/
+.venv/
+
 # Environment files
 .env
-
-# Logs and reports
-logs/*.log
-reports/*
-screenshots/*
-test_results/*
-playwright_report/*
-
-# Keep empty directories
-!logs/.gitkeep
-!reports/.gitkeep
-!screenshots/.gitkeep
-!test_results/.gitkeep
-!playwright_report/.gitkeep
-
-# VS Code
-.vscode/
