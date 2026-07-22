@@ -1,0 +1,3 @@
+POSTS_ENDPOINT = "/posts"
+USERS_ENDPOINT = "/users"
+COMMENTS_ENDPOINT = "/comments"

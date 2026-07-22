@@ -3,8 +3,13 @@ from pathlib import Path
 from typing import Any
 
 
-def read_json(file_name: str) -> dict[str, Any]:
-    file_path = Path("test_data") / file_name
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+
+def read_json_file(relative_path: str) -> dict[str, Any]:
+    """Read and return data from a JSON file."""
+
+    file_path = PROJECT_ROOT / relative_path
 
     if not file_path.exists():
         raise FileNotFoundError(

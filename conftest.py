@@ -3,12 +3,12 @@ from __future__ import annotations
 import base64
 from datetime import datetime
 from pathlib import Path
-
+import json
 import allure
 import pytest
 import pytest_html
 from playwright.sync_api import sync_playwright
-
+from src.api.api_client import APIClient
 from utils.browser_manager import BrowserManager
 from utils.config_reader import (
     get_browser,
@@ -78,6 +78,54 @@ def pytest_addoption(parser):
     help="Record Playwright trace for every test",
 )
 
+@pytest.fixture(scope="session")
+def api_client():
+    """
+    Create one reusable JSONPlaceholder API client
+    for the complete test execution.
+    """
+
+    client = APIClient(
+        base_url="https://jsonplaceholder.typicode.com",
+        timeout=30,
+    )
+
+    yield client
+
+    client.close()
+
+@pytest.fixture(scope="session")
+def post_payloads():
+    """
+    Read reusable POST, PUT and PATCH request payloads
+    from the JSON test-data file.
+    """
+
+    payload_file = (
+        PROJECT_ROOT
+        / "test_data"
+        / "post_payloads.json"
+    )
+
+    if not payload_file.exists():
+        raise FileNotFoundError(
+            f"Post payload file was not found: {payload_file}"
+        )
+
+    with payload_file.open("r", encoding="utf-8") as file:
+        return json.load(file)
+
+
+@pytest.fixture
+def api_context():
+    """
+    Store response and test data between BDD steps.
+
+    Pytest creates a new dictionary for every scenario,
+    preventing scenario data from being shared accidentally.
+    """
+
+    return {}
 
 @pytest.fixture(scope="session")
 def environment(request):

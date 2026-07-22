@@ -1,0 +1,16 @@
+{
+  "create_post": {
+    "title": "QA automation test",
+    "body": "This is a test post",
+    "userId": 1
+  },
+  "put_post": {
+    "id": 1,
+    "title": "QA automation updated title",
+    "body": "This post was completely replaced using PUT",
+    "userId": 2
+  },
+  "patch_post": {
+    "title": "QA automation patched title"
+  }
+}

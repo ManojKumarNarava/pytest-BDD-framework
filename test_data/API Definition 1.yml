@@ -1,0 +1,206 @@
+openapi: 3.0.3
+
+info:
+  title: JSONPlaceholder API
+
+  version: 1.0.0
+
+  description: Fake REST API for testing and prototyping.
+
+servers:
+  - url: https://jsonplaceholder.typicode.com
+
+paths:
+  /posts:
+    get:
+      summary: Get all posts
+
+      parameters:
+        - name: userId
+
+          in: query
+
+          schema:
+            type: integer
+
+          required: false
+
+      responses:
+        "200":
+          description: List of posts
+
+    post:
+      summary: Create a post
+
+      requestBody:
+        required: true
+
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostInput"
+
+      responses:
+        "201":
+          description: Post created
+
+  /posts/{id}:
+    get:
+      summary: Get post by ID
+
+      parameters:
+        - $ref: "#/components/parameters/PostId"
+
+      responses:
+        "200":
+          description: Single post
+
+    put:
+      summary: Replace a post
+
+      parameters:
+        - $ref: "#/components/parameters/PostId"
+
+      requestBody:
+        required: true
+
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Post"
+
+      responses:
+        "200":
+          description: Post updated
+
+    patch:
+      summary: Partially update a post
+
+      parameters:
+        - $ref: "#/components/parameters/PostId"
+
+      requestBody:
+        required: true
+
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostPatch"
+
+      responses:
+        "200":
+          description: Post patched
+
+    delete:
+      summary: Delete a post
+
+      parameters:
+        - $ref: "#/components/parameters/PostId"
+
+      responses:
+        "200":
+          description: Post deleted
+
+  /posts/{id}/comments:
+    get:
+      summary: Get comments for a post
+
+      parameters:
+        - $ref: "#/components/parameters/PostId"
+
+      responses:
+        "200":
+          description: List of comments
+
+components:
+  parameters:
+    PostId:
+      name: id
+
+      in: path
+
+      required: true
+
+      schema:
+        type: integer
+
+      example: 1
+
+  schemas:
+    Post:
+      type: object
+
+      required:
+        - id
+
+        - title
+
+        - body
+
+        - userId
+
+      properties:
+        id:
+          type: integer
+
+          example: 1
+
+        title:
+          type: string
+
+          example: foo
+
+        body:
+          type: string
+
+          example: bar
+
+        userId:
+          type: integer
+
+          example: 1
+
+    PostInput:
+      type: object
+
+      required:
+        - title
+
+        - body
+
+        - userId
+
+      properties:
+        title:
+          type: string
+
+          example: foo
+
+        body:
+          type: string
+
+          example: bar
+
+        userId:
+          type: integer
+
+          example: 1
+
+    PostPatch:
+      type: object
+
+      properties:
+        title:
+          type: string
+
+          example: foo
+
+        body:
+          type: string
+
+          example: bar
+
+        userId:
+          type: integer
+
+          example: 1
